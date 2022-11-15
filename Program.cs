@@ -11,6 +11,12 @@ var obj = MemoryPackSerializer.Deserialize<TestClass>(bin);
 if (obj != null)
     Console.WriteLine($"{obj.Id}:{obj.Name}");
 
+
+// バイナリファイルへ書き込み。「C:\test」フォルダは事前に作成しておいてください。
+using var fs = new FileStream("./test.bin", FileMode.Create);
+using var bw = new BinaryWriter(fs);
+bw.Write(bin);
+
 [MemoryPackable]
 public partial class TestClass
 {
